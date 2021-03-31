@@ -1,31 +1,36 @@
 com = 0
 book = {}
-while not com == 5:   
-    f = open('cash', 'a+')
+while not com == 6:
     print("Введите номер соответсвующей функции:\
     	\n1 - добавить контакт\
     	\n2 - удалить контакт\
     	\n3 - найти контакт\
     	\n4 - показать все контакты\
-    	\n5 - выход из программы"
+    	\n5 - Обновить контакт\
+    	\n6 - выход из программы"
     	 )
     com = int(input())
 
-    if com in range (1, 6):
+    if com in range (1, 7):
         if com == 1:
             new = str(input("Введите новый контакт: "))
             new = new.split(' ', 1)
             name = new[0]
             num = new[1]  
             book[name] = num
-            book.update
-            f.write('{0} : '.format(name))
-            f.write('{0} \n'.format(num))
+            book.update()
+            with open('cash','a+') as f:
+                f.write('{0} : '.format(name))
+                f.write('{0} \n'.format(num))
             print("Контакт {0} добавлен!".format(name))
+        
         if com == 4:
-           f.seek(0,0)
-           q =  f.readlines()
-           print(q)
+           with open('cash', 'r') as f:
+               f.seek(0, 0)
+               q =  f.readlines()
+               for fuck_sake in q:
+                   print("{0:1} ".format(fuck_sake))
+
            '''print("Найдено контактов:", len(book))
             for name, num in book.items():
                 print("{0:1}:{1:1}".format(name, num))'''
@@ -44,10 +49,19 @@ while not com == 5:
             if schg in book:
                 print("Контакт с именем {0} найден, номер:{1}".format(schg, book[schg]))
             else:
-                print("Контактов с таким именем не обнаружено")        
+                print("Контактов с таким именем не обнаружено")
+        
         if com == 5:
-            f.close()
-            print("Goodbye!")   
+            change = str(input("Введите контакт, у которого хотите сменить номер: "))
+            if change in book.keys():
+                changed = str(input("Контакт {0} найден! Введите для него новый номер: ".format(change)))
+                book[change] = changed
+                book.update()
+            else:
+                print("Контакт не найден")    
+        
+        if com == 6:
+            print("Goodbye!")
     else:
         print("Введено неправильное значение")
 
