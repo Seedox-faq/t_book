@@ -27,8 +27,8 @@ while not com == 6:
         if com == 4:
            with open('cash', 'r') as f:
                f.seek(0, 0)
-               q =  f.readlines()
-               for fuck_sake in q:
+               start_of_file =  f.readlines()
+               for fuck_sake in start_of_file:
                    print("{0:1} ".format(fuck_sake))
 
            '''print("Найдено контактов:", len(book))
